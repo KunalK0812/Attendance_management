@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL Data Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8e5; /* Light yellow background */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e07a5f; /* Darker yellow for header text */
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff; /* White background for the table */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0db4f; /* Lighter yellow border */
+        }
+
+        th {
+            background-color: #f0db4f; /* Light yellow header background */
+            color: #333; /* Dark text color for headers */
+        }
+
+        tr:hover {
+            background-color: #fff3d6; /* Hover background color */
+        }
+
+        .delete-btn {
+            background-color: #e07a5f; /* Darker yellow button background */
+            color: #fff; /* White text color for the button */
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #d9534f; /* Darker color on hover for the button */
+        }
+    </style>
+</head>
+<body>
+    <h1>Data from MySQL Table</h1>
+    <table border="1">
+        <tr>
+            <th>UID</th>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Class</th>
+            <th>Attendance</th>
+            <th>Timestamp</th>
+            <th>Action</th>
+            <!-- Add more columns based on your table structure -->
+        </tr>
+        {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>
+                    <button class="delete-btn" onclick="deleteRecord({{ row[0] }})">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        function deleteRecord(uid) {
+            if (confirm("Are you sure you want to delete this record?")) {
+                window.location.href = "/delete/" + uid;
+            }
+        }
+    </script>
+</body>
+</html>
